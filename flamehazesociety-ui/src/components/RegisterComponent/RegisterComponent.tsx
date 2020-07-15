@@ -13,16 +13,20 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { flamehazesocietyCreateNewUser } from '../../remote/flamehazesociety-api/create-new-user';
+import { User } from '../../models/User';
+import {toast} from 'react-toastify'
 
 export const RegisterComponent: FunctionComponent<any> = (props) => {
    
     const classes = useStyles();
 
     const [username, changeUsername] = useState('')
-  const [password, changePassword] = useState('')
-  const [firstname, changeFirstname] = useState('')
-  const [lastname, changeLastname] = useState('')
-    const [email, changeEmail] = useState('')
+  const [password, changePassword,] = useState('')
+  let [confirmPassword, changeConfirmPassword] = useState('')
+  const [firstName, changeFirstname] = useState('')
+  const [lastName, changeLastname] = useState('')
+  const [email, changeEmail] = useState('')
+  let [image, changeImage] = useState(undefined)
 
     const updateUsername = (event:any) => {
       event.preventDefault()
@@ -35,6 +39,11 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
       
         changePassword(event.currentTarget.value)
   }
+
+  const updateConfirmPassword = (e:any) => {
+    e.preventDefault()
+    changeConfirmPassword(e.currentTarget.value)
+}
   
   const updateFirstname = (event:any) => {
     event.preventDefault()
@@ -54,10 +63,38 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
         changeEmail(event.currentTarget.value)
     }
 
+  
+    const updateImage = (e:any) => {
+      let file:File = e.currentTarget.files[0]// the tag contains an array of files, we want the first and only
+      //blast to the past and utiliza an old school FileReader
+      let reader = new FileReader()
+      //we start an async function on the reader object
+      reader.readAsDataURL(file)
+      //set a callback function forr when the reader finishes
+      reader.onload = () => {
+          console.log(reader.result)
+          changeImage(reader.result)
+      }
+  }  
+  
     const registerSubmit = async (e:SyntheticEvent) => {
-        e.preventDefault()
+      e.preventDefault()
+
+      if(password !== confirmPassword){
+        toast.error('Password Do Not Match')
+    }
       
-      await flamehazesocietyCreateNewUser(username, password, firstname, lastname, email)
+       let newUser: User = {
+        userId: 0,
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+        role:{role:"Employee", roleId:3}
+    }
+      
+      await flamehazesocietyCreateNewUser(newUser)
       
         props.history.push('/login')
     }
@@ -82,7 +119,7 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
                   id="firstName"
                   label="First Name"
                   name="firstName"
-                  value={firstname}
+                  value={firstName}
                 onChange={updateFirstname}
                 />
               </Grid>
@@ -94,7 +131,7 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  value={lastname}
+                  value={lastName}
                 onChange={updateLastname}
                 />
               </Grid>
@@ -136,6 +173,24 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
                         value={password}
                         onChange={updatePassword}
                     />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="confirm-password"
+                        label="Confirm Password"
+                        type="password"
+                        id="confirm-password"
+                        value={confirmPassword}
+                        onChange={updateConfirmPassword}
+                    />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+              <label htmlFor='file'>Profile Pic</label>
+                <input type='file' name='file' accept='image/*' value={image} onChange={updateImage}/>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

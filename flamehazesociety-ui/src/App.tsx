@@ -12,6 +12,7 @@ import { ProfileComponent } from './components/ProfileComponent/ProfileComponent
 import { AllUsersComponent } from './components/AllUserComponent/AllUsersComponent';
 import { RegisterComponent } from './components/RegisterComponent/RegisterComponent';
 import { EditUserComponent } from './components/EditUserComponent/EditUserComponent';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -47,7 +48,7 @@ function App() {
         <Route path='/profile/:userId' component={ProfileComponent} />
         <Route path='/edit/:userId' component={EditUserComponent}/>
         <Route path='/users' component={AllUsersComponent} />
-
+        <ToastContainer position='bottom-right'/>
       </Router>
 
     </div>

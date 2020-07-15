@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User, Role } from '../models/User'
 import { getAllUsers, getUserById, saveOneUser, updateOneUser, deleteUser } from '../daos/user-dao'
-import { authenticationMiddleware } from '../middleware/authentication-middleware'
+// import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 
 
@@ -10,7 +10,7 @@ import { authorizationMiddleware } from '../middleware/authorization-middleware'
 
 export const userRouter = express.Router()
 
-userRouter.use(authenticationMiddleware)
+// userRouter.use(authenticationMiddleware)
 
 // Get All Users
 userRouter.get('/', authorizationMiddleware(['Admin']), async (req: Request, res: Response, next: NextFunction) => {

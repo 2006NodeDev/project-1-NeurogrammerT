@@ -6,6 +6,7 @@ export interface User {
     lastName: string
     email: string
     role: Role
+    image?: string
 }
   
 export interface Role {
