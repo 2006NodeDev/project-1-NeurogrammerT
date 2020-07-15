@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { getAllReimbursements, submitReimbursement, updateReimbursement, deleteReimbursement} from '../daos/reimbursement-dao';
+import { getAllReimbursements, submitReimbursement, updateReimbursement, deleteReimbursement} from '../daos/SQL/reimbursement-dao';
 import { reimbursementStatusRouter, getReimbursementByStatus } from './reimbursementStatus-router';
 import { reimbursementAuthorRouter, getReimbursementByUser } from './reimbursementAuthor-router';
 import { Reimbursement } from '../models/Reimbursement';

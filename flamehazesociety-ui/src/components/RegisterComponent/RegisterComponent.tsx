@@ -14,13 +14,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { flamehazesocietyCreateNewUser } from '../../remote/flamehazesociety-api/create-new-user';
 import { User } from '../../models/User';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 export const RegisterComponent: FunctionComponent<any> = (props) => {
-   
-    const classes = useStyles();
 
-    const [username, changeUsername] = useState('')
+  const classes = useStyles();
+
+  const [username, changeUsername] = useState('')
   const [password, changePassword,] = useState('')
   let [confirmPassword, changeConfirmPassword] = useState('')
   const [firstName, changeFirstname] = useState('')
@@ -28,236 +28,236 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
   const [email, changeEmail] = useState('')
   let [image, changeImage] = useState(undefined)
 
-    const updateUsername = (event:any) => {
-      event.preventDefault()
-      
-        changeUsername(event.currentTarget.value)
-    }
+  const updateUsername = (event: any) => {
+    event.preventDefault()
 
-    const updatePassword = (event:any) => {
-      event.preventDefault()
-      
-        changePassword(event.currentTarget.value)
+    changeUsername(event.currentTarget.value)
   }
 
-  const updateConfirmPassword = (e:any) => {
+  const updatePassword = (event: any) => {
+    event.preventDefault()
+
+    changePassword(event.currentTarget.value)
+  }
+
+  const updateConfirmPassword = (e: any) => {
     e.preventDefault()
     changeConfirmPassword(e.currentTarget.value)
-}
-  
-  const updateFirstname = (event:any) => {
+  }
+
+  const updateFirstname = (event: any) => {
     event.preventDefault()
 
     changeFirstname(event.currentTarget.value)
   }
-  
-  const updateLastname = (event:any) => {
+
+  const updateLastname = (event: any) => {
     event.preventDefault()
 
     changeLastname(event.currentTarget.value)
-}
+  }
 
-    const updateEmail = (event:any) => {
-      event.preventDefault()
-      
-        changeEmail(event.currentTarget.value)
+  const updateEmail = (event: any) => {
+    event.preventDefault()
+
+    changeEmail(event.currentTarget.value)
+  }
+
+
+  const updateImage = (e: any) => {
+    let file: File = e.currentTarget.files[0]
+    let reader = new FileReader()
+
+    reader.readAsDataURL(file)
+
+    reader.onload = () => {
+      console.log(reader.result)
+      changeImage(reader.result)
+    }
+  }
+
+  const registerSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault()
+
+    if (password !== confirmPassword) {
+      toast.error('Password Do Not Match')
     }
 
-  
-    const updateImage = (e:any) => {
-      let file:File = e.currentTarget.files[0]// the tag contains an array of files, we want the first and only
-      //blast to the past and utiliza an old school FileReader
-      let reader = new FileReader()
-      //we start an async function on the reader object
-      reader.readAsDataURL(file)
-      //set a callback function forr when the reader finishes
-      reader.onload = () => {
-          console.log(reader.result)
-          changeImage(reader.result)
-      }
-  }  
-  
-    const registerSubmit = async (e:SyntheticEvent) => {
-      e.preventDefault()
-
-      if(password !== confirmPassword){
-        toast.error('Password Do Not Match')
-    }
-      
-       let newUser: User = {
-        userId: 0,
-        username,
-        password,
-        firstName,
-        lastName,
-        email,
-        role:{role:"Employee", roleId:3}
-    }
-      
-      await flamehazesocietyCreateNewUser(newUser)
-      
-        props.history.push('/login')
+    let newUser: User = {
+      userId: 0,
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      role: { role: "Employee", roleId: 3 },
+      image
     }
 
-    return (
-        <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <AssignmentIndIcon/>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Register
+    await flamehazesocietyCreateNewUser(newUser)
+
+    props.history.push('/login')
+  }
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <AssignmentIndIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Register
           </Typography>
-          <form autoComplete="off" onSubmit={registerSubmit} className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  name="firstName"
-                  value={firstName}
+        <form autoComplete="off" onSubmit={registerSubmit} className={classes.form} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                value={firstName}
                 onChange={updateFirstname}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  value={lastName}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                value={lastName}
                 onChange={updateLastname}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  value={email}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                value={email}
                 onChange={updateEmail}
-                />
-                        </Grid>
-                        <Grid item xs={12}>
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        value={username}
-                        onChange={updateUsername}
-                    />
-              </Grid>
-              <Grid item xs={12}>
+              />
+            </Grid>
+            <Grid item xs={12}>
               <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={updatePassword}
-                    />
-              </Grid>
-              <Grid item xs={12}>
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                value={username}
+                onChange={updateUsername}
+              />
+            </Grid>
+            <Grid item xs={12}>
               <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="confirm-password"
-                        label="Confirm Password"
-                        type="password"
-                        id="confirm-password"
-                        value={confirmPassword}
-                        onChange={updateConfirmPassword}
-                    />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={password}
+                onChange={updatePassword}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="confirm-password"
+                label="Confirm Password"
+                type="password"
+                id="confirm-password"
+                value={confirmPassword}
+                onChange={updateConfirmPassword}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <label htmlFor='file'>Profile Pic</label>
-                <input type='file' name='file' accept='image/*' value={image} onChange={updateImage}/>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive updates via email."
-                />
-              </Grid>
+              <input type='file' name='file' accept='image/*' onChange={updateImage} />
+              <img alt="" src={image} />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Register
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="I want to receive updates via email."
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Register
             </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Already have an account? Sign in.
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="/login" variant="body2">
+                Already have an account? Sign in.
                 </Link>
-              </Grid>
             </Grid>
-          </form>
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
-    )
+          </Grid>
+        </form>
+      </div>
+      <Box mt={5}>
+        <Copyright />
+      </Box>
+    </Container>
+  )
 }
 
 function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          flamehazesociety
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        flamehazesociety
         </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-  
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%',
-      marginTop: theme.spacing(3),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-      backgroundColor: 'red',
-        color: 'black',
-        fontFamily: 'Impact',
-        fontSize: 16,
-    },
-  }));
-  
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: 'red',
+    color: 'black',
+    fontFamily: 'Impact',
+    fontSize: 16,
+  },
+}));

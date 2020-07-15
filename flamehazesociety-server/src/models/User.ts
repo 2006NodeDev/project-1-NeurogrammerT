@@ -6,6 +6,7 @@ export class User {
   lastName: string
   email: string
   role: Role
+  image?: string
 }
 
 export class Role {

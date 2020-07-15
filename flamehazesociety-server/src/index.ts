@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { userRouter} from './routers/user-router'
 import { reimbursementRouter } from './routers/reimbursement-router'
-import { getUserByUsernameAndPassword } from './daos/user-dao'
+import { getUserByUsernameAndPassword } from './daos/SQL/user-dao'
 import { AuthenticationError } from './errors/authenticationError'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { sessionMiddleware } from './middleware/session-middleware'

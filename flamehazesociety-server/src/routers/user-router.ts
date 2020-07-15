@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User, Role } from '../models/User'
-import { getAllUsers, getUserById, saveOneUser, updateOneUser, deleteUser } from '../daos/user-dao'
+import { getAllUsers, getUserById, saveOneUser, updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 
@@ -43,7 +43,7 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
 // Save a New User
 userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
    
-    let { username, password, firstName, lastName, email, role } = req.body
+    let { username, password, firstName, lastName, email, role, image } = req.body
 
     if((username = String && username) && (password = String && password) && (firstName = String && firstName) && (lastName = String && lastName) && (email = String && email) && (role.role = String && role.role) && (role.roleId = Number && role.roleId)) {
         
@@ -55,6 +55,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
             lastName,
             email,
             role,
+            image,
         }
 
         try {
@@ -88,7 +89,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
 // Update a User
 userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) => {
     
-        let { userId, username, password, firstName, lastName, email, role} = req.body
+        let { userId, username, password, firstName, lastName, email, role, image} = req.body
         
         if((userId = Number && userId))  {
             let updatedUser: User = {
@@ -99,6 +100,7 @@ userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =>
                 role,
                 userId,
                 email,
+                image
             }
             updatedUser.email = email || undefined
             updatedUser.username = username || undefined

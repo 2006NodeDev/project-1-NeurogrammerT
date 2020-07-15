@@ -1,7 +1,7 @@
 import express from 'express'
 import { ReimbursementDTOtoReimbursementConverter } from '../utils/ReimbursementDTO-to-Reimbursement-converter'
 import { ResourceNotFoundError } from '../errors/resourceNotFoundError'
-import { connectionPool } from '../daos'
+import { connectionPool } from '../daos/SQL'
 import { PoolClient } from 'pg'
 import { Reimbursement } from '../models/Reimbursement'
 import { authenticationMiddleware } from '../middleware/authentication-middleware'
