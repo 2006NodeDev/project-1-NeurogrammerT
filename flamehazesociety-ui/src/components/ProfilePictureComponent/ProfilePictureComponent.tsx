@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Avatar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import { User } from '../../models/User';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,11 +41,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const ProfilePictureComponent: FunctionComponent<any> = (props) => {
+interface IPictureProps{
+  user:User|null
+}
+
+export const ProfilePictureComponent: FunctionComponent<IPictureProps> = (props) => {
 
   const classes = useStyles();
 
+    let userPofilePic = props.user.image
   return (
-    <div><Avatar variant="circle" alt="Remy Sharp" src="https://blog.photofeeler.com/wp-content/uploads/2017/09/tinder-photo-size-tinder-picture-size-tinder-aspect-ratio-image-dimensions-crop.jpg" className={classes.small} /></div>
+    <div><Avatar variant="circle" alt="user profile pic" src={userPofilePic} className={classes.small} /></div>
   )
 }

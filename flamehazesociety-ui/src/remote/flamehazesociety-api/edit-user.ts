@@ -1,17 +1,9 @@
 import { flamehazesocietyClient } from ".";
+import { User } from "../../models/User";
 
 
-export const flamehazesocietyEditUser = async (userId: number, username?: string, password?: string, firstname?: string, lastname?: string, email?: string, role?:{role:string, roleId:number}) => {
+export const flamehazesocietyEditUser = async (editUser:User) => {
 
-    let editUser = {
-        userId,
-        username,
-        password,
-        firstname,
-        lastname,
-        email,
-        role
-    }
     try{
         let response = await flamehazesocietyClient.patch(`/users`, editUser)
         console.log(response);

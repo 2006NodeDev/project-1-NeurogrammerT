@@ -1,14 +1,11 @@
 import React, { FunctionComponent, useState, SyntheticEvent } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { User } from '../../models/User'
-import { RouteComponentProps, useParams } from 'react-router'
 import { flamehazesocietyEditUser } from '../../remote/flamehazesociety-api/edit-user'
 import { Grid, makeStyles, Container } from '@material-ui/core'
+import { useParams } from 'react-router'
+import { User } from '../../models/User'
 
-interface IUserEditProps extends RouteComponentProps {
-    user: User
-}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,16 +43,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const EditUserComponent: FunctionComponent<IUserEditProps> = (props) => {
+export const EditUserComponent: FunctionComponent<any> = (props) => {
 
     const classes = useStyles();
 
     const { userId } = useParams()
     const [username, changeUsername] = useState('')
     const [password, changePassword] = useState('')
-    const [firstname, changeFirstname] = useState('')
-    const [lastname, changeLastname] = useState('')
+    const [firstName, changeFirstname] = useState('')
+    const [lastName, changeLastname] = useState('')
     const [email, changeEmail] = useState('')
+    let [image, changeImage] = useState(undefined)
 
     const updateUsername = (event: any) => {
         event.preventDefault()
@@ -86,11 +84,35 @@ export const EditUserComponent: FunctionComponent<IUserEditProps> = (props) => {
 
         changeEmail(event.currentTarget.value)
     }
+    
+    const updateImage = (e: any) => {
+        let file: File = e.currentTarget.files[0]
+        let reader = new FileReader()
+    
+        reader.readAsDataURL(file)
+    
+        reader.onload = () => {
+          console.log(reader.result)
+          changeImage(reader.result)
+        }
+      }
 
     const editSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
-
-        await flamehazesocietyEditUser(userId, username, password, firstname, lastname, email)
+       
+        console.log(image);
+        
+        let editUser:User = {
+            userId,
+            username,
+            password,
+            firstName,
+            lastName,
+            email,
+            role:undefined,
+            image
+        }
+        await flamehazesocietyEditUser(editUser)
 
         props.history.push(`/profile/${userId}`)
     }
@@ -102,9 +124,12 @@ export const EditUserComponent: FunctionComponent<IUserEditProps> = (props) => {
                         <Grid item xs={12} sm={6} md={12} lg={6} className={classes.grid}>
                             <TextField id="username" label="Username" value={username} onChange={updateUsername} />
                             <TextField id="password" type='password' label="Password" value={password} onChange={updatePassword} />
-                            <TextField id="firstname" label="First Name" value={firstname} onChange={updateFirstname} />
-                            <TextField id="lastname" label="Last Name" value={lastname} onChange={updateLastname} />
+                            <TextField id="firstname" label="First Name" value={firstName} onChange={updateFirstname} />
+                            <TextField id="lastname" label="Last Name" value={lastName} onChange={updateLastname} />
                             <TextField id="email" type='email' label="Email" value={email} onChange={updateEmail} />
+                            <label htmlFor='file'>Profile Pic</label>
+                            <input type='file' name='file' accept='image/*' onChange={updateImage} />
+                            <img alt="" src={image} />
                             <Button className={classes.submit} type='submit' variant="contained" color="primary">Update</Button>
                         </Grid>
                     </Grid>

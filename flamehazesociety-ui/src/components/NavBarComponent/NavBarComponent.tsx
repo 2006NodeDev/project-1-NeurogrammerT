@@ -75,7 +75,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
                         <Typography variant="h4" className={classes.title}>
                             Flame Haze Society
                 </Typography>
-                        <ProfilePictureComponent />
+                        <ProfilePictureComponent user={props.user} />
                     </Toolbar>
                 </AppBar>
             </nav>
