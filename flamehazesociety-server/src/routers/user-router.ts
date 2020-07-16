@@ -1,8 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User, Role } from '../models/User'
-import { getAllUsers, getUserById, saveOneUser, updateOneUser, deleteUser } from '../daos/SQL/user-dao'
+import { getAllUsers, getUserById, updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
+import { saveOneUserService } from '../services/user-service'
 
 
 
@@ -59,7 +60,7 @@ userRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
         }
 
         try {
-            let savedUser = await saveOneUser(newUser)
+            let savedUser = await saveOneUserService(newUser)
             res.json(savedUser)
         } catch (e) {
             next(e)
