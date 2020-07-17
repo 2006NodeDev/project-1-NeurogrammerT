@@ -6,7 +6,7 @@ export const ProfileComponent: FunctionComponent<any> = (props) => {
     
     return (
         <div>
-            <DashboardComponent/>
+            <DashboardComponent user={props.user}/>
         </div>
     )
 }

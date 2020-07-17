@@ -43,7 +43,7 @@ export const LoginComponent: FunctionComponent<ILoginProps> = (props) => {
         let res = await flamehazesocietyLogin(username, password)
         props.changeCurrentUser(res)
         changePassword('')
-        props.history.push(`/clicker`)
+        props.history.push(`/home`)
     }
 
     return (

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: "auto",
         marginTop: theme.spacing(5),
         width: theme.spacing(40),
-        height: theme.spacing(25),
+        height: theme.spacing(30),
       },
     },
     paper: {
@@ -37,7 +37,10 @@ export const UserDisplayComponent: FunctionComponent<IUserDisplayProps> = (props
   let classes = useStyles()
   return (
     <div className={classes.root}>
-        <Paper className={classes.paper} elevation={4}>
+      <Paper className={classes.paper} elevation={4}>
+      <Typography className={classes.typography} variant='h4'>
+            UserId : {props.user.userId}
+          </Typography>
           <Typography className={classes.typography} variant='h4'>
             Username : {props.user.username}
           </Typography>

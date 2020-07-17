@@ -18,7 +18,7 @@ import { mainListItems, secondaryListItems } from '../DashboardComponent/listite
 import { flamehazesocietyGetUserById } from '../../remote/flamehazesociety-api/getUsersById';
 
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
     root: {
