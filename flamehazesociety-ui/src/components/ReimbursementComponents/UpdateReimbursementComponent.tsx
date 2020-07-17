@@ -26,6 +26,7 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
     const [resolver, changeResolver,] = useState(undefined)
     const [dateSubmitted, changeDateSubmitted] = useState(undefined)
     const [dateResolved, changeDateResolved] = useState(undefined)
+    const [email, changeEmail] = useState(undefined)
 
     const updateReimbursementId = (event: any) => {
         event.preventDefault()
@@ -37,6 +38,12 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
         event.preventDefault()
 
         changeAuthor(event.currentTarget.value)
+    }
+
+    const updateEmail = (event: any) => {
+        event.preventDefault()
+
+        changeEmail(event.currentTarget.value)
     }
 
     const updateAmount = (event: any) => {
@@ -92,6 +99,7 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
             resolver,
             status,
             type,
+            email
         }
 
         await flamehazesocietyUpdateReimbursement(updateReimbursement)
@@ -121,6 +129,18 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
                                 name="reimbursement-id"
                                 value={reimbursementId}
                                 onChange={updateReimbursementId}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label="User Email"
+                                name="email"
+                                value={email}
+                                onChange={updateEmail}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>

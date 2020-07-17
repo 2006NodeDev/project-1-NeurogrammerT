@@ -8,4 +8,5 @@ export class ReimbursementDTO{
   resolver: number
   status: number
   type: number
+  email: string
 }

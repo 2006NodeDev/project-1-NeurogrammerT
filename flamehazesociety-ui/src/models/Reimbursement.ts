@@ -7,7 +7,8 @@ export class Reimbursement {
     description: string
     resolver: number
     status: number
-    type: number
+  type: number
+  email: string
   }
   
   export class ReimbursementStatus {

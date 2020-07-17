@@ -8,6 +8,7 @@ export class Reimbursement {
   resolver: number
   status: number
   type: number
+  email: string
 }
 
 export class ReimbursementStatus {

@@ -68,10 +68,11 @@ reimbursementRouter.post('/', async (req: Request, res: Response, next:NextFunct
         description,
         resolver,
         status,
-        type
+        type,
+        email
     } = req.body
     
-    if ((author = Number && author) && (amount = Number && amount) && (dateSubmitted = Date && dateSubmitted) && (description = String && description) && (type = Number && type)) {
+    if ((author = Number && author) && (amount = Number && amount) && (dateSubmitted = Date && dateSubmitted) && (description = String && description) && (type = Number && type) && (email = String && email)) {
 
         let defaultSubmitDate: Date = new Date()
         let defaultResolveDate: String = "2020-12-31"
@@ -85,7 +86,8 @@ reimbursementRouter.post('/', async (req: Request, res: Response, next:NextFunct
                 description,
                 resolver,
                 status,
-                type
+            type,
+                email
         }
             
             newReimbursement.dateSubmitted = dateSubmitted || defaultSubmitDate
@@ -136,7 +138,8 @@ reimbursementRouter.patch('/', authorizationMiddleware(['Finance Manager']), asy
             description,
             resolver,
             status,
-            type
+            type,
+            email
         } = req.body
 
     if ((reimbursementId = Number && reimbursementId)) {
@@ -152,7 +155,8 @@ reimbursementRouter.patch('/', authorizationMiddleware(['Finance Manager']), asy
             description,
             resolver,
             status,
-            type
+            type,
+            email
         }
         
         updatedReimbursement.dateSubmitted = dateSubmitted || undefined
@@ -163,6 +167,7 @@ reimbursementRouter.patch('/', authorizationMiddleware(['Finance Manager']), asy
         updatedReimbursement.amount - amount || undefined
         updatedReimbursement.type = type || undefined
         updatedReimbursement.description = description || undefined
+        updatedReimbursement.email = email || undefined
         
         try {
             await updatedReimbursementService(updatedReimbursement)
@@ -193,7 +198,8 @@ reimbursementRouter.delete('/', authorizationMiddleware(['Finance Manager']), as
             description: '',
             resolver:0,
             status:0,
-            type:0
+            type: 0,
+            email: ''
         }
         
         try {

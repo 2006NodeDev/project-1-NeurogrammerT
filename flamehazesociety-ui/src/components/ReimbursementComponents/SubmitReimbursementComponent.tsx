@@ -21,11 +21,18 @@ export const SubmitReimbursementComponent: FunctionComponent<any> = (props) => {
   const [amount, changeAmount,] = useState(null)
   const [description, changeDescription] = useState('')
   const [type, changeType] = useState(null)
+  const [email, changeEmail] = useState('')
 
   const updateAuthor = (event: any) => {
     event.preventDefault()
 
     changeAuthor(event.currentTarget.value)
+  }
+
+  const updateEmail = (event: any) => {
+    event.preventDefault()
+
+    changeEmail(event.currentTarget.value)
   }
 
   const updateAmount = (event: any) => {
@@ -48,19 +55,20 @@ export const SubmitReimbursementComponent: FunctionComponent<any> = (props) => {
   const registerSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-      let defaultSubmitDate: Date = new Date()
-      
+    let defaultSubmitDate: Date = new Date()
+
     let newReimbursement: Reimbursement = {
-        reimbursementId: 0,
-        author,
-        amount,
-        dateSubmitted: defaultSubmitDate,
-        dateResolved: "2020-12-31",
-        description,
-        resolver: 0,
-        status: 0,
-        type,
-      }
+      reimbursementId: 0,
+      author,
+      amount,
+      dateSubmitted: defaultSubmitDate,
+      dateResolved: "2020-12-31",
+      description,
+      resolver: 0,
+      status: 0,
+      type,
+      email
+    }
 
     await flamehazesocietyCreateNewReimbursement(newReimbursement)
 
@@ -89,6 +97,18 @@ export const SubmitReimbursementComponent: FunctionComponent<any> = (props) => {
                 name="author"
                 value={author}
                 onChange={updateAuthor}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="User Email"
+                name="email"
+                value={email}
+                onChange={updateEmail}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

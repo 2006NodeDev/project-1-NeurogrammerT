@@ -12,7 +12,8 @@ export function ReimbursementDTOtoReimbursementConverter(rdto: ReimbursementDTO)
         description: rdto.description,
         resolver: rdto.resolver,
         status: rdto.status,
-        type: rdto.type
+        type: rdto.type,
+        email: rdto.email
     }
 
 }
