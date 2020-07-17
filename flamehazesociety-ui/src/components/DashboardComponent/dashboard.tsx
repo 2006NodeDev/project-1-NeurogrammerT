@@ -120,6 +120,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
+
     },
     paper: {
         padding: theme.spacing(2),
@@ -128,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 300,
+        height: 550,
     },
 }));
 
@@ -149,7 +150,7 @@ export const DashboardComponent: FunctionComponent<any> = (props) => {
 
 
     useEffect(() => {
-
+        
         let getUser = async () => {
 
             let userInfo = await flamehazesocietyGetUserById(userId)

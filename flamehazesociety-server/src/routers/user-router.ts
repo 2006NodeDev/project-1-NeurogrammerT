@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { User, Role } from '../models/User'
-import { getAllUsers, getUserById, updateOneUser, deleteUser } from '../daos/SQL/user-dao'
+import {updateOneUser, deleteUser } from '../daos/SQL/user-dao'
 // import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
-import { saveOneUserService } from '../services/user-service'
+import { saveOneUserService, getUserByIDService, getAllUsersService } from '../services/user-service'
 
 
 
@@ -17,7 +17,7 @@ export const userRouter = express.Router()
 userRouter.get('/', authorizationMiddleware(['Admin']), async (req: Request, res: Response, next: NextFunction) => {
     
     try {
-        let allUsers = await getAllUsers() 
+        let allUsers = await getAllUsersService() 
         res.json(allUsers)
     } catch (e) {
         next(e)
@@ -33,7 +33,7 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
         res.status(400).send('Id must be a number')
     } else {
         try {
-            let user = await getUserById(+id)
+            let user = await getUserByIDService(+id)
             res.json(user)
         } catch (e) {
             next(e)

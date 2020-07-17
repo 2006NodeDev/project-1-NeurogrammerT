@@ -16,7 +16,8 @@ import { ToastContainer } from 'react-toastify';
 import { LogoutComponent } from './components/LogoutComponent/LogoutComponent';
 import { SubmitReimbursementComponent } from './components/ReimbursementComponents/SubmitReimbursementComponent';
 import { UpdateReimbursementComponent } from './components/ReimbursementComponents/UpdateReimbursementComponent';
-import { ViewReimbursementComponent } from './components/ReimbursementComponents/ViewReimbursementComponent';
+import { AllReimbursementComponent } from './components/ReimbursementComponents/AllReimbursementComponent';
+
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -55,7 +56,7 @@ function App() {
         <Route path='/logout' component={LogoutComponent} />
         <Route path='/reimbursement/submit' component={SubmitReimbursementComponent} />
         <Route path='/reimbursement/update' component={UpdateReimbursementComponent} />
-        <Route path='/reimbursements' component={ViewReimbursementComponent} />
+        <Route path='/reimbursements' component={AllReimbursementComponent} />
         <ToastContainer position='bottom-right'/>
       </Router>
 

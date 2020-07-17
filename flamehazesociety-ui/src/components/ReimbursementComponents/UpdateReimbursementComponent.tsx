@@ -18,14 +18,14 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
     const classes = useStyles();
 
     const [reimbursementId, changeReimbursementId] = useState(null)
-    const [author, changeAuthor] = useState(null)
-    const [amount, changeAmount,] = useState(null)
-    const [description, changeDescription] = useState('')
-    const [type, changeType] = useState(null)
-    const [status, changeStatus] = useState(null)
-    const [resolver, changeResolver,] = useState(null)
+    const [author, changeAuthor] = useState(undefined)
+    const [amount, changeAmount,] = useState(undefined)
+    const [description, changeDescription] = useState(undefined)
+    const [type, changeType] = useState(undefined)
+    const [status, changeStatus] = useState(undefined)
+    const [resolver, changeResolver,] = useState(undefined)
     const [dateSubmitted, changeDateSubmitted] = useState(undefined)
-    const [dateResolved, changeDateResolved] = useState(null)
+    const [dateResolved, changeDateResolved] = useState(undefined)
 
     const updateReimbursementId = (event: any) => {
         event.preventDefault()
@@ -96,7 +96,7 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
 
         await flamehazesocietyUpdateReimbursement(updateReimbursement)
 
-        props.history.push('/profile')
+        props.history.push('/home')
     }
 
     return (
@@ -114,6 +114,7 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
                     <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
+                                required
                                 fullWidth
                                 id="reimbursement-id"
                                 label="ReimbursementId"
@@ -161,7 +162,7 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
                                 margin="normal"
                                 fullWidth
                                 id="type"
-                                label="Type = Lodging(1), Food(2), Travel(3), Other(4)"
+                                label="Type # = Lodging(1), Food(2), Travel(3), Other(4)"
                                 name="type"
                                 value={type}
                                 onChange={updateType}
