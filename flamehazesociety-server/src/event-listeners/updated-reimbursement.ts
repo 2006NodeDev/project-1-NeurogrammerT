@@ -1,5 +1,5 @@
 import { expressEventEmitter, customExpressEvents } from ".";
-import { userTopic } from "../messaging";
+import { reimbursementTopic } from "../messaging";
 import { Reimbursement } from "../models/Reimbursement";
 
 
@@ -7,7 +7,7 @@ expressEventEmitter.on(customExpressEvents.UPDATED_REIMBURSEMENT, (updatedReimbu
     
     setImmediate(async () => {
         try {
-            let res = await userTopic.publishJSON(updatedReimbursement)
+            let res = await reimbursementTopic.publishJSON(updatedReimbursement)
             console.log(res);
             
         } catch (e) {

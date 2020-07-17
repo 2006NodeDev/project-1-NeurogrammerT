@@ -1,10 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { getAllReimbursements, submitReimbursement, updateReimbursement, deleteReimbursement} from '../daos/SQL/reimbursement-dao';
+import { submitReimbursement, deleteReimbursement} from '../daos/SQL/reimbursement-dao';
 import { reimbursementStatusRouter, getReimbursementByStatus } from './reimbursementStatus-router';
-import { reimbursementAuthorRouter, getReimbursementByUser } from './reimbursementAuthor-router';
+import { reimbursementAuthorRouter} from './reimbursementAuthor-router';
 import { Reimbursement } from '../models/Reimbursement';
 import { authenticationMiddleware } from '../middleware/authentication-middleware';
 import { authorizationMiddleware } from '../middleware/authorization-middleware';
+import { getAllReimbursementService, getReimbursementByUserService, updatedReimbursementService } from '../services/reimbursement-service';
 
 export const reimbursementRouter = express.Router() 
 
@@ -19,7 +20,7 @@ reimbursementRouter.use('/author/userId', reimbursementAuthorRouter);
 // Get All Reimbursements
 reimbursementRouter.get('/', authorizationMiddleware(['Finance Manager']), async (req:Request,res:Response,next:NextFunction)=>{
     try {
-        let allReimbursements = await getAllReimbursements() 
+        let allReimbursements = await getAllReimbursementService() 
         res.json(allReimbursements)
     } catch (e) {
         next(e)
@@ -48,7 +49,7 @@ reimbursementAuthorRouter.get('/:userId', authorizationMiddleware(['Finance Mana
         res.status(400).send('userId needs to be a number')
     }else {
         try {
-            let allReimbursementsByUser = await getReimbursementByUser(+userId) 
+            let allReimbursementsByUser = await getReimbursementByUserService(+userId) 
             res.json(allReimbursementsByUser)
         } catch (e) {
             next(e)
@@ -164,7 +165,7 @@ reimbursementRouter.patch('/', authorizationMiddleware(['Finance Manager']), asy
         updatedReimbursement.description = description || undefined
         
         try {
-            await updateReimbursement(updatedReimbursement)
+            await updatedReimbursementService(updatedReimbursement)
             res.send('You have succesfully updated this reimbursement')
         } catch (e) {
             next(e)
