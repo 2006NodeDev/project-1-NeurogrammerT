@@ -3,7 +3,7 @@ export let fhsBaseUrl:string
 if(process.env['NODE_ENV'] === 'production'){
     //if we ran npm run build
     //use the deployed address
-    fhsBaseUrl = ''
+    fhsBaseUrl = 'https://flamehazesociety.neurogrammert.com'
 }else {
     //we are in test or dev, use the local address
     fhsBaseUrl = 'http://localhost:2020'
