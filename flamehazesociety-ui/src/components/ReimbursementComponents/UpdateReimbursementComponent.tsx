@@ -112,7 +112,7 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
 
         await flamehazesocietyUpdateReimbursement(updateReimbursement)
 
-        props.history.push('/home')
+        props.history.push('/success')
     }
 
     return (

@@ -51,16 +51,16 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     menuItems.push(<MenuItem key={'logout'} onClick={handleClose}><Link to='/logout'>Logout</Link></MenuItem>)
 
     if (props.user) {
-        menuItems.push(<MenuItem key={'clicker'} onClick={handleClose}><Link to='/clicker'>Clicker</Link></MenuItem>,
+        menuItems.push(
             <MenuItem key={'profile'} onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.userId : '0'}`}>My Profile</Link></MenuItem>,
-            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.userId}`}>Edit Profile</Link></MenuItem>, <MenuItem key={'clicker'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>)
+            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.userId}`}>Edit Profile</Link></MenuItem>, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>)
     }
     if (props.user && props.user.role.role === 'Admin') {
         menuItems.push(<MenuItem key={'users'} onClick={handleClose}><Link to='/users'>All Users</Link></MenuItem>,)
     }
 
     if (props.user && props.user.role.role === 'Finance Manager') {
-        menuItems.push(<MenuItem key={'clicker'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>)
+        menuItems.push(<MenuItem key={'viewReimbursements'} onClick={handleClose}><Link to='/reimbursements'>View Reimbursements</Link></MenuItem>,<MenuItem key={'updateReimbursement'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>)
     }
     return (
         (props.user) ?

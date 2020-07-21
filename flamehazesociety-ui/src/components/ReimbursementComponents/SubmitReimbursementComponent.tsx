@@ -80,7 +80,7 @@ export const SubmitReimbursementComponent: FunctionComponent<any> = (props) => {
 
     await flamehazesocietyCreateNewReimbursement(newReimbursement)
 
-    props.history.push('/profile')
+    props.history.push('/success')
   }
 
   return (
