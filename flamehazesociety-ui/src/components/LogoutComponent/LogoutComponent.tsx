@@ -1,24 +1,25 @@
-import React, { FunctionComponent, SyntheticEvent } from 'react'
-import Axios from 'axios'
+import React, { FunctionComponent, SyntheticEvent} from 'react'
+import { Button } from '@material-ui/core';
+import { flamehazesocietyLogOut } from '../../remote/flamehazesociety-api/logout';
 
 
 export const LogoutComponent: FunctionComponent<any> = (props) => {
 
-    let userSession = 'http://localhost:2020/logout'
-
-    console.log(userSession);
-
     const logoutUser = async (e: SyntheticEvent) => {
 
-        Axios.delete(userSession)
+        e.preventDefault()
 
-        props.history.push(`/home`)
+        let res = await flamehazesocietyLogOut()
+
+        console.log(res)
+
+        props.history.push(`/login`)
     } 
 
 
     return (
         <div>
-            <button id='logout' onClick={logoutUser}>Logout</button>
+            <Button id='logout' onClick={logoutUser}>Logout</Button>
         </div>
     )
 }

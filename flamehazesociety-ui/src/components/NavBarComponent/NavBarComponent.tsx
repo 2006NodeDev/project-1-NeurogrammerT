@@ -60,7 +60,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     }
 
     if (props.user && props.user.role.role === 'Finance Manager') {
-        menuItems.push(<MenuItem key={'clicker'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>,<MenuItem key={'clicker'} onClick={handleClose}><Link to='/reimbursements'>All Reimbursements</Link></MenuItem>)
+        menuItems.push(<MenuItem key={'clicker'} onClick={handleClose}><Link to='/reimbursement/update'>Update Reimbursement</Link></MenuItem>)
     }
     return (
         (props.user) ?

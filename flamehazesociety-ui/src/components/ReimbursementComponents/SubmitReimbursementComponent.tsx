@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Reimbursement } from '../../models/Reimbursement';
 import { flamehazesocietyCreateNewReimbursement } from '../../remote/flamehazesociety-api/create-reimbursement';
+import { toast } from 'react-toastify';
 
 export const SubmitReimbursementComponent: FunctionComponent<any> = (props) => {
 
@@ -56,6 +57,13 @@ export const SubmitReimbursementComponent: FunctionComponent<any> = (props) => {
     e.preventDefault()
 
     let defaultSubmitDate: Date = new Date()
+
+    if (!author || !amount || !description || !email || !type) {
+      toast.error('Please fill in all fields', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        className: 'foo-bar'
+      })
+    }
 
     let newReimbursement: Reimbursement = {
       reimbursementId: 0,

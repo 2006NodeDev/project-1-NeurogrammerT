@@ -8,6 +8,6 @@ export const flamehazesocietyGetUserById = async (userId:number) =>{
         return response.data
     } catch(e){
         console.log(e);
-        console.log('we should probably handle this');   
+        return('Something went wrong')   
     }
 }

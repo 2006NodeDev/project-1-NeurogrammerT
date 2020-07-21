@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: "auto",
         marginTop: theme.spacing(5),
         width: theme.spacing(40),
-        height: theme.spacing(30),
+        height: theme.spacing(35),
       },
     },
     paper: {

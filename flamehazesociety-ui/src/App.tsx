@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <Router>
        
-        <Redirect to='/login' />
+        <Redirect to='/home' />
         
         <NavBarComponent user={currentUser}/>
         

@@ -80,7 +80,10 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      toast.error('Password Do Not Match')
+      toast.error('Password Do Not Match', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        className: 'foo-bar'
+      })
     }
 
     let newUser: User = {

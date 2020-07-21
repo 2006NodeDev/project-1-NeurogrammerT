@@ -11,5 +11,6 @@ export const flamehazesocietyLogin = async (username:string, password:string) =>
         return response.data
     } catch(e){
         console.log(e);
+        return('Something went wrong')
     }
 }

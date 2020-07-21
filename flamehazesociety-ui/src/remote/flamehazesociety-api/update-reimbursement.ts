@@ -10,5 +10,6 @@ export const flamehazesocietyUpdateReimbursement = async (editReimbursement:Reim
         return response.data
     } catch(e){
         console.log(e);
+        return('Something went wrong')
     }
 }

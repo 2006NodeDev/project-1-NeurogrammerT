@@ -5,6 +5,7 @@ import { flamehazesocietyEditUser } from '../../remote/flamehazesociety-api/edit
 import { Grid, makeStyles, Container } from '@material-ui/core'
 import { useParams } from 'react-router'
 import { User } from '../../models/User'
+import { toast } from 'react-toastify'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -101,6 +102,10 @@ export const EditUserComponent: FunctionComponent<any> = (props) => {
         e.preventDefault()
        
         console.log(image);
+
+        if (!userId) {
+            toast.error('You must include a userId')
+        }
         
         let editUser:User = {
             userId,

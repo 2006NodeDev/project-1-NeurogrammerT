@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Reimbursement } from '../../models/Reimbursement';
 import { flamehazesocietyUpdateReimbursement } from '../../remote/flamehazesociety-api/update-reimbursement';
+import { toast } from 'react-toastify';
 
 export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
 
@@ -88,6 +89,13 @@ export const UpdateReimbursementComponent: FunctionComponent<any> = (props) => {
 
     const registerSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
+
+        if (!reimbursementId || !email) {
+            toast.error('You must include an reimbursmentId and user email', {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                className: 'foo-bar'
+              })
+        }
 
         let updateReimbursement: Reimbursement = {
             reimbursementId,

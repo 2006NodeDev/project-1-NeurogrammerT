@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { RouteComponentProps } from 'react-router-dom'
 import { flamehazesocietyLogin } from '../../remote/flamehazesociety-api/login';
+import { toast } from 'react-toastify';
 
 
 interface ILoginProps extends RouteComponentProps {
@@ -40,6 +41,14 @@ export const LoginComponent: FunctionComponent<ILoginProps> = (props) => {
 
     const loginSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
+
+        if (!username || !password) {
+            toast.error('You have entered an incorrect username or password', {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                className: 'foo-bar'
+              })
+        }
+
         let res = await flamehazesocietyLogin(username, password)
         props.changeCurrentUser(res)
         changePassword('')

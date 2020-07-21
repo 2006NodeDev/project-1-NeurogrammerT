@@ -10,5 +10,6 @@ export const flamehazesocietyEditUser = async (editUser:User) => {
         return response.data
     } catch(e){
         console.log(e);
+        return('Something went wrong')
     }
 }
