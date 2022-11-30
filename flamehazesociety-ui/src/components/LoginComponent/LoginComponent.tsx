@@ -46,7 +46,7 @@ export const LoginComponent: FunctionComponent<ILoginProps> = (props) => {
             toast.error('You have entered an incorrect username or password', {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 className: 'foo-bar'
-              })
+            })
         }
 
         let res = await flamehazesocietyLogin(username, password)
@@ -109,12 +109,18 @@ export const LoginComponent: FunctionComponent<ILoginProps> = (props) => {
                                 Forgot password?
                             </Link>
                         </Grid>
-                        <Grid item>
-                            <Link href="/register" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
+                            <Grid item>
+                                <Link
+                                component="button"
+                                variant="body2"
+                                onClick={() => {
+                                    props.history.push('/register')
+                                }}
+                                >
+                                Don't have an account? Sign Up
+                                </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
                 </form>
             </div>
             <Box mt={8}>
@@ -128,9 +134,9 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit" target="_blank" href="https://material-ui.com/">
                 flamehazesociety
-      </Link>{' '}
+            </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>

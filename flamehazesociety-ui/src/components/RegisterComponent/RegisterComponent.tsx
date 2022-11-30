@@ -111,7 +111,7 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
         </Avatar>
         <Typography component="h1" variant="h5">
           Register
-          </Typography>
+        </Typography>
         <form autoComplete="off" onSubmit={registerSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -211,12 +211,18 @@ export const RegisterComponent: FunctionComponent<any> = (props) => {
             className={classes.submit}
           >
             Register
-            </Button>
+          </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => {
+                  props.history.push('/login')
+                }}
+              >
                 Already have an account? Sign in.
-                </Link>
+              </Link>
             </Grid>
           </Grid>
         </form>
@@ -232,9 +238,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" target="_blank" href="https://material-ui.com/">
         flamehazesociety
-        </Link>{' '}
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
