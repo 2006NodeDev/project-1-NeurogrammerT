@@ -48,12 +48,13 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     menuItems.push(<MenuItem key={'home'} onClick={handleClose}><Link to='/home'>Home</Link></MenuItem>)
     menuItems.push(<MenuItem key={'login'} onClick={handleClose}><Link to='/login'>Login</Link></MenuItem>)
     menuItems.push(<MenuItem key={'register'} onClick={handleClose}><Link to='/register'>Register</Link></MenuItem>)
-    menuItems.push(<MenuItem key={'logout'} onClick={handleClose}><Link to='/logout'>Logout</Link></MenuItem>)
+    // menuItems.push(<MenuItem key={'logout'} onClick={handleClose}><Link to='/logout'>Logout</Link></MenuItem>)
 
     if (props.user) {
         menuItems.push(
             <MenuItem key={'profile'} onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.userId : '0'}`}>My Profile</Link></MenuItem>,
-            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.userId}`}>Edit Profile</Link></MenuItem>, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>)
+            <MenuItem key={'edit'} onClick={handleClose}><Link to={`/edit/${props.user.userId}`}>Edit Profile</Link></MenuItem>, <MenuItem key={'submitReimbursement'} onClick={handleClose}><Link to='/reimbursement/submit'>Submit Reimbursement</Link></MenuItem>,
+            <MenuItem key={'logout'} onClick={handleClose}><Link to='/logout'>Logout</Link></MenuItem>)
     }
     if (props.user && props.user.role.role === 'Admin') {
         menuItems.push(<MenuItem key={'users'} onClick={handleClose}><Link to='/users'>All Users</Link></MenuItem>,)
@@ -101,7 +102,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
                         </Menu>
                         <Typography variant="h4" className={classes.title}>
                             Flame Haze Society
-                </Typography>
+                        </Typography>
                         <Button><Link color="inherit" to='/login'>Login</Link></Button>
                         <Button><Link color="inherit" to='/register'>Register</Link></Button>
                     </Toolbar>
