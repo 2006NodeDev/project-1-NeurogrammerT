@@ -114,7 +114,7 @@ userRouter.patch('/', async (req: Request, res: Response, next: NextFunction) =>
         try {
             await updateOneUser(updatedUser)
 
-            res.send('You have succesfully updated this user')
+            res.send('You have successfully updated this user')
         }
             
         catch (e) {
@@ -147,7 +147,7 @@ userRouter.delete('/', authorizationMiddleware(['Admin']), async (req: Request, 
         try {
             await deleteUser(deletedUser)
 
-            res.send('You have succesfully deleted this user')
+            res.send('You have successfully deleted this user')
 
         } catch (e) {
             next(e)
