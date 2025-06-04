@@ -164,7 +164,7 @@ reimbursementRouter.patch('/', authorizationMiddleware(['Finance Manager']), asy
         updatedReimbursement.resolver = resolver || undefined
         updatedReimbursement.status = status || undefined
         updatedReimbursement.author = author || undefined
-        updatedReimbursement.amount - amount || undefined
+        updatedReimbursement.amount = amount || undefined
         updatedReimbursement.type = type || undefined
         updatedReimbursement.description = description || undefined
         updatedReimbursement.email = email || undefined
