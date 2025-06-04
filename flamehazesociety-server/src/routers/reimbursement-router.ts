@@ -171,7 +171,7 @@ reimbursementRouter.patch('/', authorizationMiddleware(['Finance Manager']), asy
         
         try {
             await updatedReimbursementService(updatedReimbursement)
-            res.send('You have succesfully updated this reimbursement')
+            res.send('You have successfully updated this reimbursement')
         } catch (e) {
             next(e)
         }
@@ -204,7 +204,7 @@ reimbursementRouter.delete('/', authorizationMiddleware(['Finance Manager']), as
         
         try {
             await deleteReimbursement(deletedReimbursement)  
-            res.send('You have succesfully deleted this reimbursement')
+            res.send('You have successfully deleted this reimbursement')
         } catch (e) {
             next(e)
         }
